@@ -9,11 +9,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     @user = User.new(sign_up_params)
-    if @user.save
-      @user.confirm! # TODO Dunno if we want to have users manually confirm or no
+    if @user.valid? # TODO confirm straight up or send email?
+      @user.confirm
       render json: @user.to_json
     else
-      render json: { errors: @user.errors.full_messages }.to_json, status: 422
+      render json: { errors: @user.errors }.to_json, status: 422
     end
   end
 

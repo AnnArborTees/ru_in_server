@@ -24,6 +24,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'devise'
 gem 'inherited_resources'
+gem 'simple_token_authentication', '~> 1.0'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'

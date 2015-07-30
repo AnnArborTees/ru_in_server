@@ -16,6 +16,7 @@ describe Users::RegistrationsController do
         expect(response).to be_ok
 
         expect(result[:email]).to eq 'test@example.com'
+        expect(result[:authentication_token]).to_not be_nil
         expect(User.where(email: 'test@example.com')).to exist
       end
     end
@@ -27,7 +28,7 @@ describe Users::RegistrationsController do
         }
         expect(response.status).to eq 422
 
-        expect(result[:errors]).to include "Password confirmation doesn't match Password"
+        expect(result[:errors][:password_confirmation]).to include "doesn't match Password"
       end
     end
   end
