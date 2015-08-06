@@ -7,9 +7,15 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  # TODO try this shit out
+  def create
+    @user = User.find_for_authentication(email: params[:email])
+    if @user.nil? || !@user.valid_password?(params[:password])
+      render json: { errors: { password: ['does not match'] } }
+    else
+      render json: @user.to_json
+    end
+  end
 
   # DELETE /resource/sign_out
   # def destroy

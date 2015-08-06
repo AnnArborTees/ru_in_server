@@ -13,7 +13,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
       @user.confirm
       render json: @user.to_json
     else
-      render json: { errors: @user.errors }.to_json, status: 422
+      Rails.logger.info "Errors: " + { errors: @user.errors }.to_json
+      render json: { errors: @user.errors }, status: 422
     end
   end
 
